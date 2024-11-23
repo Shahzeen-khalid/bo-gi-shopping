@@ -1,0 +1,7 @@
+git config --global user.name "Shahzeen-khalid"
+git config --global user.email "s3creationshahzi@gmail.com"
+
+
+ith edit cheyy
+
+ente github email
