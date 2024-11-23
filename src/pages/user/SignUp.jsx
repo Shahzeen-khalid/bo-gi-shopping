@@ -1,22 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../../context/AuthContext";
 import Wallpapper from "../../assets/Login-2.jpg";
-import userEndpoints from "../../api/userEndpoints";
 
 const SignUp = () => {
   const [authError, setAuthError] = useState("");
+
+  const { signUp } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
+
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    try { 
-      const response = await userEndpoints.signUp(data)
+    try {
+      const response = await signUp(data)
+      console.log(response);
+      
       navigate("/");
     } catch (error) {
       setAuthError(error.message);
@@ -60,7 +66,7 @@ const SignUp = () => {
               {errors.name && (
                 <p className="text-red-500 text-sm">
                   {errors.name.message}
-                  </p>
+                </p>
               )}
             </div>
 

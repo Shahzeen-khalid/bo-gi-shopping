@@ -1,6 +1,5 @@
 import React, { createContext, useState } from "react";
 import userEndpoints from "../api/userEndpoints";
-import { data } from "react-router";
 
 export const AuthContext = createContext();
 
@@ -8,11 +7,15 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const fetchUser = () => {
+  const fetchUser = async () => {
     const userId = localStorage.getItem("session") || null;
     try {
       if (userId) {
-        setUser(true);
+        const user = await userEndpoints.fetchUser(userId);
+        setUser(user);
+        setLoading(false);
+      }
+      else {
         setLoading(false);
       }
     } catch {
@@ -22,20 +25,24 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (data) => {
-      const response = await userEndpoints.login(data);
-      console.log(response);
-      
-      if (response.success) {
-        localStorage.setItem("session", data.id);
-        setUser();
-        return { success: true };
-      }
-      return { success: false };
+    const response = await userEndpoints.login(data);
+    if (response.success) {
+      localStorage.setItem("session", response.user.id);
+      setUser(response.user);
+      return response;
+    }
+    return response;
   };
 
   const signUp = async (data) => {
     const response = await userEndpoints.signUp(data);
     console.log("signup", response)
+    if (response.success) {
+      localStorage.setItem("session", response.user.id);
+      setUser(response.user);
+      return response;
+    }
+    return response;
   };
 
   const logout = () => {
@@ -44,7 +51,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, fetchUser, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, signUp, fetchUser, logout }}>
       {children}
     </AuthContext.Provider>
   );
