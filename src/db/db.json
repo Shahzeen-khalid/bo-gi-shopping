@@ -800,15 +800,22 @@
   ],
   "users": [
     {
-      "id": "5861",
-      "name": "shahzeen khalid",
-      "email": "shahzeen2000@gmail.com",
-      "password": "123456",
-      "cpassword": "123456"
+      "id": "2702",
+      "name": "Rahil",
+      "email": "rahil@gmail.com",
+      "password": "12345678",
+      "cpassword": "12345678"
     },
     {
-      "id": "3d27",
-      "name": "rahil",
+      "id": "8974",
+      "name": "Rahil",
+      "email": "rahil@gmail.com",
+      "password": "12345678",
+      "cpassword": "12345678"
+    },
+    {
+      "id": "7c8b",
+      "name": "Rahil",
       "email": "rahil@gmail.com",
       "password": "12345678",
       "cpassword": "12345678"
@@ -820,20 +827,17 @@
       "name": "Cotton Patterned Bodysuits",
       "price": 25.99,
       "rating": 4.7,
-      "quantity": 3,
+      "quantity": 1,
       "image": "https://assets.digitalcontent.marksandspencer.app/image/upload/w_1008,h_1319,q_auto,f_auto,e_sharpen/SD_04_T92_4525S_J4_X_EC_2",
       "description": "Keep your baby comfy all day! Made from 100% breathable cotton, these onesies are perfect for sensitive baby skin. Available in cute pastel shades with snap closures for easy diaper changes. Suitable for babies aged 0-12 months."
     },
     {
-      "id": "dd37"
-    },
-    {
-      "id": "112",
-      "name": "Twin Cute Bunny Set",
-      "price": 22.49,
-      "rating": 4.2,
+      "id": "101",
+      "name": "Soft Cotton Onesie",
+      "price": 15.99,
+      "rating": 4.8,
       "quantity": 1,
-      "image": "https://m.media-amazon.com/images/I/418kWZF49XL._SX679_.jpg",
+      "image": "https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F20%2Fcf%2F20cf9f3d9606e17b96e0483111bba90809aba654.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bkids_baby_boy_clothing_nightwear%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/main]",
       "description": "Keep your baby comfy all day! Made from 100% breathable cotton, these onesies are perfect for sensitive baby skin. Available in cute pastel shades with snap closures for easy diaper changes. Suitable for babies aged 0-12 months."
     }
   ]

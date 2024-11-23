@@ -3,7 +3,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { FaUserCircle } from "react-icons/fa";
 
 const ProfilePage = () => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading, logout } = useContext(AuthContext);
 
   if (loading) {
     return (
@@ -25,8 +25,8 @@ const ProfilePage = () => {
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
-      console.log("User signed out");
+      logout();
+      navigate('/');
     } catch (error) {
       console.error("Error signing out: ", error);
     }

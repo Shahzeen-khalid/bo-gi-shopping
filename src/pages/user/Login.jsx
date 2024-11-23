@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import Wallpapper from "../../assets/Login-2.jpg";
@@ -15,18 +15,16 @@ const Login = ({ isRegister, setIsRegister, setShowProfileModal }) => {
   } = useForm();
   const navigate = useNavigate();
 
-
   const { login } = useContext(AuthContext);
 
-
-  const onSubmit = async ({ email, password }) => {
-
+  const onSubmit = async (data) => {
     try {
-      const response = await userEndpoints.login( email, password);
-      if (response.success) login(response.user);
-      else throw new Error(response.message)
+      const response = await login(data)
+      if (response.success) {
+        navigate("/");
+      } else throw new Error(response);
     } catch (error) {
-      setAuthError(error.message);
+      setAuthError(error.response.message);
       console.error("Authentication Error: ", error.message);
     }
   };

@@ -1,16 +1,14 @@
-import React, { useContext } from "react";
-import { BrowserRouter as Router, Routes, Route} from "react-router";
-import { useLocation, useNavigate } from "react-router"; 
-// HOME PAGE
+import React, { useEffect, useContext } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+
 import HomePage from "./pages/user/HomePage";
 import Navbar from "./components/user/Navbar/Navbar";
 import ProfilePage from "./pages/user/ProfilePage";
 
-// Animate on Scroll
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-// Navigated Pages
 import Categories from "./pages/user/Categories";
 import Category from "./pages/user/Category";
 import AboutUs from "./pages/user/AboutUs";
@@ -27,10 +25,12 @@ import PaymentPage from "./pages/user/PaymentPage";
 import Cart from "./pages/user/Cart";
 import SignUp from "./pages/user/SignUp";
 
-
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
-  React.useEffect(() => {
+  const { fetchUser } = useContext(AuthContext);
+
+  useEffect(() => {
     AOS.init({
       offset: 100,
       duration: 800,
@@ -40,31 +40,28 @@ function App() {
     AOS.refresh();
   }, []);
 
+  fetchUser();
+
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleOrderNow = () => {
     navigate("/payment");
   };
-   
 
   return (
     <div
       className="bg-white dark:bg-gray-900 
     dark:text-white duration-200"
     >
-     {!["/signup", "/signupin", "/login", "/register"].includes(location.pathname) && (
-  <Navbar handleOrderNow={handleOrderNow} />
-)}
-
+      {!["/signup", "/signupin", "/login", "/register"].includes(
+        location.pathname
+      ) && <Navbar handleOrderNow={handleOrderNow} />}
 
       <Routes>
-        <Route
-          path="/"
-          element={<HomePage />}
-        />
-        
-        <Route path="/login" element={<Login />}/>
+        <Route path="/" element={<HomePage />} />
+
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/category/:categoryName" element={<Category />} />
