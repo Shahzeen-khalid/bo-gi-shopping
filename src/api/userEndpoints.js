@@ -1,12 +1,24 @@
 import axiosInstance from "./axiosInstance";
 
-const login = async (email, password) => {
+const fetchUser = async (userId) => {
+  try {
+    const users = (await axiosInstance.get('/users')).data;
+    const user = users.find(u => u.id === userId);
+    if (!user) throw new Error("User not found");
+    return user;
+  } catch (error) {
+    console.error("Error fetching users:", error.message);
+    return null;
+  }
+};
+
+const login = async ({ email, password }) => {
   try {
     const response = await axiosInstance.get('/users');
     const users = response.data;
-    const user = users.find(
-      (u) => u.email === email && u.password === password
-    );
+    const user = users.find(u => u.email == email && u.password == password);
+    console.log(user);
+
     if (user) {
       return { success: true, user };
     } else {
@@ -18,9 +30,9 @@ const login = async (email, password) => {
   }
 };
 
-const signUp = async (data) => {
+const signUp = async ({ name, email, password }) => {
   try {
-    const response = await axiosInstance.post("/users", data);
+    const response = await axiosInstance.post("/users", { name, email, password });
     return { success: true, user: response.data };
   } catch (error) {
     console.error("Error during sign-up:", error.message);
@@ -28,4 +40,4 @@ const signUp = async (data) => {
   }
 };
 
-export default { login, signUp };
+export default { fetchUser, login, signUp };

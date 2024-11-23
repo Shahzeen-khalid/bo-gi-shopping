@@ -9,17 +9,16 @@ import Footer from "../../components/user/Footer";
 
 const HomePage = () => {
 
-  
   return (
     <>
-    <Hero />
-    <Products />
-    <TopProd />
-    <Banner />
-    <Subscribe />
-    <Testimonials />
-    <Footer />
-  </>
+      <Hero />
+      <Products />
+      <TopProd />
+      <Banner />
+      <Subscribe />
+      <Testimonials />
+      <Footer />
+    </>
   )
 }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router";
 import { useLocation, useNavigate } from "react-router";
 
 import HomePage from "./pages/user/HomePage";
@@ -26,9 +26,15 @@ import Cart from "./pages/user/Cart";
 import SignUp from "./pages/user/SignUp";
 
 import { AuthContext } from "./context/AuthContext";
+import { Navigate } from "react-router";
+
+// const ProtectedRoute = () => {
+//   const { user } = useContext(AuthContext);
+//   return user ? <Navigate to={'/'} /> : <Outlet />;
+// };
 
 function App() {
-  const { fetchUser } = useContext(AuthContext);
+  const { user, fetchUser } = useContext(AuthContext);
 
   useEffect(() => {
     AOS.init({
@@ -59,10 +65,11 @@ function App() {
       ) && <Navbar handleOrderNow={handleOrderNow} />}
 
       <Routes>
-        <Route path="/" element={<HomePage />} />
-
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        {/* <Route path="/" element={<ProtectedRoute />}>
+        </Route> */}
+        <Route path="/" element={<HomePage />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/category/:categoryName" element={<Category />} />
         <Route path="/product/:id" element={<ProductDetails />} />

@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import Wallpapper from "../../assets/Login-2.jpg";
-import userEndpoints from "../../api/userEndpoints";
 import { AuthContext } from "../../context/AuthContext";
 
 const Login = ({ isRegister, setIsRegister, setShowProfileModal }) => {
@@ -20,12 +19,12 @@ const Login = ({ isRegister, setIsRegister, setShowProfileModal }) => {
   const onSubmit = async (data) => {
     try {
       const response = await login(data)
-      if (response.success) {
-        navigate("/");
-      } else throw new Error(response);
+      console.log(response);
+      if (!response.success) throw new Error(response.message);
+      navigate("/");
     } catch (error) {
-      setAuthError(error.response.message);
-      console.error("Authentication Error: ", error.message);
+      console.log(error);
+      setAuthError(error.message);
     }
   };
 
